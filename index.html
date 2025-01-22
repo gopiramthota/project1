@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train Ticket Marketplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        header {
+            background-color: #0078d4;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"], input[type="password"], input[type="date"], select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #0078d4;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>IRCTC Ticket Marketplace</h1>
+    </header>
+    <div class="container" id="login-page">
+        <h2>Login or Register</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+    </div>
+
+    <div class="container hidden" id="home-page">
+        <h2>Welcome to Ticket Marketplace</h2>
+        <button onclick="sellTicketForm()">Sell a Ticket</button>
+        <button onclick="buyTicketForm()">Buy a Ticket</button>
+    </div>
+
+    <div class="container hidden" id="sell-page">
+        <h2>Sell Your Ticket</h2>
+        <input type="text" id="sell-from" placeholder="From">
+        <input type="text" id="sell-to" placeholder="To">
+        <input type="date" id="sell-date">
+        <button onclick="sellTicket()">Post Ticket for Sale</button>
+        <button onclick="goHome()">Back</button>
+    </div>
+
+    <div class="container hidden" id="buy-page">
+        <h2>Buy a Ticket</h2>
+        <input type="text" id="buy-from" placeholder="From">
+        <input type="text" id="buy-to" placeholder="To">
+        <input type="date" id="buy-date">
+        <button onclick="searchTickets()">Search Tickets</button>
+        <div id="ticket-list"></div>
+        <button onclick="goHome()">Back</button>
+    </div>
+
+    <script>
+        function login() {
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('home-page').classList.remove('hidden');
+        }
+
+        function register() {
+            alert('Registration functionality is under development.');
+        }
+
+        function goHome() {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById('home-page').classList.remove('hidden');
+        }
+
+        function sellTicketForm() {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById('sell-page').classList.remove('hidden');
+        }
+
+        function buyTicketForm() {
+            document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+            document.getElementById('buy-page').classList.remove('hidden');
+        }
+
+        function sellTicket() {
+            const from = document.getElementById('sell-from').value;
+            const to = document.getElementById('sell-to').value;
+            const date = document.getElementById('sell-date').value;
+            if (from && to && date) {
+                alert(`Ticket from ${from} to ${to} on ${date} is posted for sale.`);
+                goHome();
+            } else {
+                alert('Please fill in all the details.');
+            }
+        }
+
+        function searchTickets() {
+            const from = document.getElementById('buy-from').value;
+            const to = document.getElementById('buy-to').value;
+            const date = document.getElementById('buy-date').value;
+            if (from && to && date) {
+                const ticketList = document.getElementById('ticket-list');
+                ticketList.innerHTML = `<p>Showing tickets from ${from} to ${to} on ${date}</p>`;
+                ticketList.innerHTML += '<button>Buy Ticket 1</button><br>';
+                ticketList.innerHTML += '<button>Buy Ticket 2</button><br>';
+            } else {
+                alert('Please fill in all the details.');
+            }
+        }
+    </script>
+</body>
+</html>
